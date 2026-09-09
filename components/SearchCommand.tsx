@@ -94,12 +94,12 @@ export default function SearchCommand({ renderAs = 'button', label = 'Add stock'
                 {isSearchMode ? 'Search results' : 'Popular stocks'}
                 {` `}({displayStocks?.length || 0})
               </div>
-              {displayStocks?.map((stock, i) => (
-                  <li key={stock.symbol} className="search-item">
+              {displayStocks?.map((stock) => (
+                  <li key={stock.symbol} className="search-item flex items-center gap-3">
                     <Link
                         href={`/stocks/${stock.symbol}`}
                         onClick={handleSelectStock}
-                        className="search-item-link"
+                        className="search-item-link flex-1"
                     >
                       <TrendingUp className="h-4 w-4 text-gray-500" />
                       <div  className="flex-1">
@@ -110,14 +110,14 @@ export default function SearchCommand({ renderAs = 'button', label = 'Add stock'
                           {stock.symbol} | {stock.exchange } | {stock.type}
                         </div>
                       </div>
-                      <WatchlistButton
-                        symbol={stock.symbol}
-                        company={stock.name}
-                        isInWatchlist={stock.isInWatchlist}
-                        type="icon"
-                        onWatchlistChange={handleWatchlistChange}
-                      />
                     </Link>
+                    <WatchlistButton
+                      symbol={stock.symbol}
+                      company={stock.name}
+                      isInWatchlist={stock.isInWatchlist}
+                      type="icon"
+                      onWatchlistChange={handleWatchlistChange}
+                    />
                   </li>
               ))}
             </ul>

@@ -47,7 +47,7 @@ const WatchlistButton = ({
           description: result.error || 'Please try again',
         });
       }
-    } catch (e) {
+    } catch {
       setAdded(added);
       toast.error('Failed to update watchlist', {
         description: 'Please try again',

@@ -193,18 +193,19 @@ export const searchStocks = cache(async (query?: string): Promise<StockWithWatch
 // Fetch stock details by symbol
 export const getStocksDetails = cache(async (symbol: string) => {
   const cleanSymbol = symbol.trim().toUpperCase();
+  const token = process.env.FINNHUB_API_KEY ?? NEXT_PUBLIC_FINNHUB_API_KEY;
 
   try {
     const [quote, profile, financials] = await Promise.all([
       fetchJSON(
-        `${FINNHUB_BASE_URL}/quote?symbol=${cleanSymbol}&token=${NEXT_PUBLIC_FINNHUB_API_KEY}`
+        `${FINNHUB_BASE_URL}/quote?symbol=${cleanSymbol}&token=${token}`
       ),
       fetchJSON(
-        `${FINNHUB_BASE_URL}/stock/profile2?symbol=${cleanSymbol}&token=${NEXT_PUBLIC_FINNHUB_API_KEY}`,
+        `${FINNHUB_BASE_URL}/stock/profile2?symbol=${cleanSymbol}&token=${token}`,
         3600
       ),
       fetchJSON(
-        `${FINNHUB_BASE_URL}/stock/metric?symbol=${cleanSymbol}&metric=all&token=${NEXT_PUBLIC_FINNHUB_API_KEY}`,
+        `${FINNHUB_BASE_URL}/stock/metric?symbol=${cleanSymbol}&metric=all&token=${token}`,
         1800
       ),
     ]);
