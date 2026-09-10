@@ -3,6 +3,8 @@ import { Star, TrendingDown, TrendingUp } from 'lucide-react';
 import WatchlistButton from '@/components/WatchlistButton';
 import { getWatchlistWithData } from '@/lib/actions/watchlist.actions';
 
+export const dynamic = 'force-dynamic';
+
 export default async function WatchlistPage() {
   const watchlist = await getWatchlistWithData();
 

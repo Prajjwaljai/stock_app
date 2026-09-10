@@ -80,6 +80,7 @@ export const removeFromWatchlist = async (symbol: string) => {
   }
 };
 
+
 // Get user's watchlist
 export const getUserWatchlist = async () => {
   try {
@@ -99,8 +100,18 @@ export const getUserWatchlist = async () => {
   }
 };
 
+type WatchlistStock = {
+  company: string;
+  symbol: string;
+  currentPrice?: number;
+  priceFormatted?: string;
+  changeFormatted?: string;
+  changePercent?: number;
+  marketCap?: string;
+  peRatio?: string;
+};
 // Get user's watchlist with stock data
-export const getWatchlistWithData = async () => {
+export const getWatchlistWithData = async (): Promise<WatchlistStock[]> => {
   try {
     const session = await auth.api.getSession({
       headers: await headers(),
